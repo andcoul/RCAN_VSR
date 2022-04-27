@@ -2,13 +2,14 @@ from data_utils import *
 import matplotlib.pyplot as plt
 
 
-class TrainSetLoader_Vimeo(Dataset):
-    def __init__(self, dataset_dir, video_name, scale_factor, inType='y'):
-        super(TestSetLoader).__init__()
-        self.upscale_factor = scale_factor
+class TrainSetLoader(Dataset):
+    def __init__(self, dataset_dir, scale_factor, inType='y'):
+        super(TrainSetLoader).__init__()
+        self.scale_factor = scale_factor
         self.dir = dataset_dir
-        self.video_name = video_name
-        self.img_list = os.listdir(self.dir + '/sequences/' + self.video_name)
+        with open(dataset_dir+'/sep_trainlist.txt', 'r') as f:
+            self.train_list = f.read().splitlines()
+        self.tranform = augumentation()
         self.inType = inType
 
     def __getitem__(self, idx):
@@ -19,8 +20,8 @@ class TrainSetLoader_Vimeo(Dataset):
                 idx_frame = 0
             if idx_frame > len(self.img_list) - 1:
                 idx_frame = len(self.img_list) - 1
-            img_hr = Image.open(self.dir + '/sequences/' + self.video_name + '/im' + str(idx_frame + 1) + '.png')
-            img_lr = Image.open(self.dir + '/LR_x4/' + self.video_name + '/im' + str(idx_frame + 1) + '.png')
+            img_hr = Image.open(self.dir + '/sequences/' + self.train_list[idx] + '/im' + str(idx_frame + 1) + '.png')
+            img_lr = Image.open(self.dir + '/LR_x4/' + self.train_list[idx] + '/im' + str(idx_frame + 1) + '.png')
             img_hr = np.array(img_hr, dtype=np.float32) / 255.0
             if idx_frame == idx:
                 h, w, c = img_hr.shape
@@ -56,7 +57,7 @@ class TrainSetLoader_Vimeo(Dataset):
         return len(self.img_list)
 
 
-class TrainSetLoader(Dataset):
+class TrainSetLoader_std(Dataset):
     def __init__(self, dataset_dir, scale_factor, inType='y'):
         super(TrainSetLoader).__init__()
         self.scale_factor = scale_factor
