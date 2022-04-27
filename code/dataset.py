@@ -72,7 +72,7 @@ class TrainSetLoader_std(Dataset):
         LR = []
         for i in range(7):
             img_hr = Image.open(self.dir + '/sequences/' + self.train_list[idx] + '/im' + str(i + 1) + '.png')
-            img_lr = Image.open(self.dir + '/LR_x4/' + self.train_list[idx] + '/im' + str(i + 1) + '.png')
+            img_lr = Image.open(self.dir + '/lr_x4/' + self.train_list[idx] + '/im' + str(i + 1) + '.png')
             img_hr = np.array(img_hr, dtype=np.float32) / 255.0
             img_lr = np.array(img_lr, dtype=np.float32) / 255.0
             if self.inType == 'y':
@@ -114,7 +114,7 @@ class ValidSetLoader(Dataset):
         LR = []
         for i in range(7):
             img_hr = Image.open(self.dir + '/sequences/' + self.train_list[idx] + '/im' + str(i + 1) + '.png')
-            img_lr = Image.open(self.dir + '/LR_x4/' + self.train_list[idx] + '/im' + str(i + 1) + '.png')
+            img_lr = Image.open(self.dir + '/lr_x4/' + self.train_list[idx] + '/im' + str(i + 1) + '.png')
             img_hr = np.array(img_hr, dtype=np.float32) / 255.0
             img_lr = np.array(img_lr, dtype=np.float32) / 255.0
             if self.inType == 'y':
@@ -246,7 +246,7 @@ class TestSetLoader_Vimeo(Dataset):
             if idx_frame > len(self.img_list) - 1:
                 idx_frame = len(self.img_list) - 1
             img_hr = Image.open(self.dir + '/sequences/' + self.video_name + '/im' + str(idx_frame + 1) + '.png')
-            img_lr = Image.open(self.dir + '/LR_x4/' + self.video_name + '/im' + str(idx_frame + 1) + '.png')
+            img_lr = Image.open(self.dir + '/lr_x4/' + self.video_name + '/im' + str(idx_frame + 1) + '.png')
             img_hr = np.array(img_hr, dtype=np.float32) / 255.0
             if idx_frame == idx:
                 h, w, c = img_hr.shape
