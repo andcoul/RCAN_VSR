@@ -91,7 +91,7 @@ def save_checkpoint(state, save_path, filename='checkpoint.pth.tar'):
 
 
 def main():
-    train_set = TrainSetLoader_Vimeo(opt.train_dataset_dir, scale_factor=opt.scale_factor, inType=opt.inType)
+    train_set = TrainSetLoader(opt.train_dataset_dir, scale_factor=opt.scale_factor, inType=opt.inType)
     train_loader = DataLoader(dataset=train_set, num_workers=opt.threads, batch_size=opt.batchSize, shuffle=True)
     train(train_loader, opt.scale_factor, opt.nEpochs)
 
