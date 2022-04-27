@@ -3,9 +3,15 @@ import matplotlib.pyplot as plt
 
 
 class TrainSetLoader(Dataset):
+<<<<<<< Updated upstream
     def __init__(self, dataset_dir, scale_factor, inType='y'):
         super(TrainSetLoader).__init__()
         self.scale_factor = scale_factor
+=======
+    def __init__(self, dataset_dir, video_name, scale_factor, inType='y'):
+        super(TestSetLoader).__init__()
+        self.upscale_factor = scale_factor
+>>>>>>> Stashed changes
         self.dir = dataset_dir
         with open(dataset_dir+'/sep_trainlist.txt', 'r') as f:
             self.train_list = f.read().splitlines()
