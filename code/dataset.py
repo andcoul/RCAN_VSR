@@ -1,5 +1,4 @@
 from data_utils import *
-import matplotlib.pyplot as plt
 
 
 class TrainSetLoader(Dataset):
@@ -7,7 +6,7 @@ class TrainSetLoader(Dataset):
         super(TestSetLoader).__init__()
         self.upscale_factor = scale_factor
         self.dir = dataset_dir
-        with open(dataset_dir+'/sep_trainlist.txt', 'r') as f:
+        with open(dataset_dir + '/sep_trainlist.txt', 'r') as f:
             self.train_list = f.read().splitlines()
         self.tranform = augumentation()
         self.inType = inType
@@ -18,8 +17,8 @@ class TrainSetLoader(Dataset):
         for idx_frame in range(idx - 3, idx + 4):
             if idx_frame < 0:
                 idx_frame = 0
-            if idx_frame > len(self.img_list) - 1:
-                idx_frame = len(self.img_list) - 1
+            if idx_frame > len(self.train_list) - 1:
+                idx_frame = len(self.train_list) - 1
             img_hr = Image.open(self.dir + '/sequences/' + self.train_list[idx] + '/im' + str(idx_frame + 1) + '.png')
             img_lr = Image.open(self.dir + '/lr_x4/' + self.train_list[idx] + '/im' + str(idx_frame + 1) + '.png')
             img_hr = np.array(img_hr, dtype=np.float32) / 255.0
