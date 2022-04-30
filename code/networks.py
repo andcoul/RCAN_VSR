@@ -53,6 +53,7 @@ class DilatedConv(nn.Module):
                  bn=True, bias=False, convolution='3d'):
         super(DilatedConv, self).__init__()
         self.in_channel = in_channel
+        self.convolution = convolution
         if self.convolution == '3d':
             self.conv = nn.Conv3d(in_channels=in_channel, out_channels=out_channels, kernel_size=kernel_size,
                                   stride=stride, padding=padding, bias=bias)

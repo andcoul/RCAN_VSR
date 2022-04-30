@@ -53,7 +53,7 @@ class TrainSetLoader(Dataset):
         return LR, HR, SR_buicbic
 
     def __len__(self):
-        return len(self.img_list)
+        return len(self.train_list)
 
 
 class TrainSetLoader_std(Dataset):

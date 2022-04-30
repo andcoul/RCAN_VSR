@@ -22,8 +22,7 @@ def random_crop(HR, LR, patch_size_lr, scale_factor): # HR: N*H*W
     h_start = h_start_lr * scale_factor
     h_end = h_end_lr * scale_factor
     w_start = w_start_lr * scale_factor
-    w_end = w_end_lr * scale_factor
-
+    w_end = w_end_lr * sc
     HR = HR[:, :, h_start:h_end, w_start:w_end]
     LR = LR[:, :, h_start_lr:h_end_lr, w_start_lr:w_end_lr]
 
